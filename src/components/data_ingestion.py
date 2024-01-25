@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 from src import logger
 from src import exception
+from src.components import data_transformation
 
 @dataclass
 class DataIngestnConfig:
@@ -48,4 +49,8 @@ class DataIngestn:
         
 if __name__ == '__main__':
     obj = DataIngestn()
-    obj.start_data_ingestn()
+    train_data, test_data = obj.start_data_ingestn()
+    
+    data_transf = data_transformation.DataTransformation()
+    data_transf.initiate_data_transformation(train_data, test_data)
+    

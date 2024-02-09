@@ -9,6 +9,8 @@ from src import logger
 from src import exception
 from src.components import data_transformation
 
+from src.components.training import ModelTrainer
+
 @dataclass
 class DataIngestnConfig:
     # create a data class that has all the path related stuff related to data
@@ -52,5 +54,7 @@ if __name__ == '__main__':
     train_data, test_data = obj.start_data_ingestn()
     
     data_transf = data_transformation.DataTransformation()
-    data_transf.initiate_data_transformation(train_data, test_data)
+    train_array, test_array, _ = data_transf.initiate_data_transformation(train_data, test_data)
     
+    modelTrainer = ModelTrainer()
+    print(modelTrainer.start_model_trainer(train_array, test_array))
